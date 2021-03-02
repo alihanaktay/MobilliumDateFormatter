@@ -1,31 +1,19 @@
 name: Unit Test
 
-on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
-
+on: push
 jobs:
-  build:
-
-    runs-on: macos-latest
-    strategy:
-      matrix:
-        destination: ['platform=iOS Simulator,OS=14.1,name=iPhone 8']
-        xcode: ['/Applications/Xcode_12.4.app/Contents/Developer']
-    env:
-      XC_VERSION: ${{ '12.4' }}
-      XC_WORKSPACE: ${{ 'Example/MobilliumDateFormatter.xcworkspace' }}
-      XC_SCHEME: ${{ 'MobilliumDateFormatter-Example' }}
+  test:
+    runs-on: macOS-latest
     steps:
-    - name: Select latest Xcode
-      run: "sudo xcode-select -s ${{ matrix.xcode }}"
+    - uses: actions/checkout@master
+    - name: Set XCode Version
+      run: sudo xcode-select -s /Applications/Xcode_11.app
     - name: Install Dependencies
       run: |
         cd Example
         pod install --repo-update
-      env:
-        DEVELOPER_DIR: ${{ matrix.xcode }}
-    - name: Run Unit and UI Tests
-      run: /usr/bin/xcodebuild test -workspace "$XC_WORKSPACE" -scheme "$XC_SCHEME" -destination ${{ matrix.destination }}
+      shell: bash
+    - uses: ty0x2333/cocoapods-action@master
+      with:
+        additional_build_params: -destination 'platform=iOS Simulator,name=iPhone 11,OS=13.0'
+        additional_lint_params: --private
