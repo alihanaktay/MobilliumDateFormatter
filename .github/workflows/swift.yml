@@ -7,6 +7,9 @@ on:
 jobs:
  ios12Test:
      runs-on: macos-latest
+     strategy:
+        matrix:
+          destination: ['platform=iOS Simulator,name=iPhone Xs,OS=12.4', 'platform=iOS Simulator,name=iPhone Xs Max,OS=12.4', 'platform=iOS Simulator,name=iPhone 8,OS=12.4', 'platform=iOS Simulator,name=iPhone 8 Plus,OS=12.4']
      env:
        XC_VERSION: ${{ '10.3' }}
        XC_WORKSPACE: ${{ 'Example/MobilliumDateFormatter.xcworkspace' }}
@@ -20,9 +23,12 @@ jobs:
         cd Example
         pod install --repo-update
      - name: Run Unit and UI Tests
-       run: /usr/bin/xcodebuild test -workspace "$XC_WORKSPACE" -scheme "$XC_SCHEME" -destination 'platform=iOS Simulator,name=iPhone 11,OS=12.4'
+       run: /usr/bin/xcodebuild test -workspace "$XC_WORKSPACE" -scheme "$XC_SCHEME" -destination ${{ matrix.destination }}
  ios13Test:
      runs-on: macos-latest
+     strategy:
+        matrix:
+          destination: ['platform=iOS Simulator,name=iPhone 11,OS=13.7', 'platform=iOS Simulator,name=iPhone 8,OS=13.7', 'platform=iOS Simulator,name=iPhone 8 Plus,OS=13.7', 'platform=iOS Simulator,name=iPhone 11 Pro,OS=13.7', 'platform=iOS Simulator,name=iPhone 11 Pro Max,OS=13.7']
      env:
        XC_VERSION: ${{ '11.7' }}
        XC_WORKSPACE: ${{ 'Example/MobilliumDateFormatter.xcworkspace' }}
@@ -36,9 +42,12 @@ jobs:
         cd Example
         pod install --repo-update
      - name: Run Unit and UI Tests
-       run: /usr/bin/xcodebuild test -workspace "$XC_WORKSPACE" -scheme "$XC_SCHEME" -destination 'platform=iOS Simulator,name=iPhone 11,OS=13.7'
+       run: /usr/bin/xcodebuild test -workspace "$XC_WORKSPACE" -scheme "$XC_SCHEME" -destination ${{ matrix.destination }}
  ios14Test:
      runs-on: macos-latest
+     strategy:
+        matrix:
+          destination: ['platform=iOS Simulator,name=iPhone 12,OS=14.4','platform=iOS Simulator,name=iPhone 8,OS=14.4','platform=iOS Simulator,name=iPhone 8 Plus,OS=14.4','platform=iOS Simulator,name=iPhone 12 Pro,OS=14.4','platform=iOS Simulator,name=iPhone 12 Pro Max,OS=14.4']
      env:
        XC_VERSION: ${{ '12.4' }}
        XC_WORKSPACE: ${{ 'Example/MobilliumDateFormatter.xcworkspace' }}
@@ -52,6 +61,4 @@ jobs:
         cd Example
         pod install --repo-update
      - name: Run Unit and UI Tests
-       run: /usr/bin/xcodebuild test -workspace "$XC_WORKSPACE" -scheme "$XC_SCHEME" -destination 'platform=iOS Simulator,name=iPhone 11,OS=14.4'
-       
-
+       run: /usr/bin/xcodebuild test -workspace "$XC_WORKSPACE" -scheme "$XC_SCHEME" -destination ${{ matrix.destination }}
