@@ -8,4 +8,4 @@ xcode_workspace: Example/MobilliumDateFormatter.xcworkspace
 xcode_scheme: MobilliumDateFormatter-Example
 xcode_destination: platform=iOS Simulator,OS=12.1,name=iPhone X
 before_install:
-- pod install
+- pod install --project-directory=Example/
