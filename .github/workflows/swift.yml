@@ -23,7 +23,7 @@ jobs:
         cd Example
         pod install --repo-update
      - name: Run Unit and UI Tests
-       run: /usr/bin/xcodebuild test -workspace "$XC_WORKSPACE" -scheme "$XC_SCHEME" -destination ${{ matrix.destination }}
+       run: /usr/bin/xcodebuild test -workspace "$XC_WORKSPACE" -scheme "$XC_SCHEME" -destination '${{ matrix.destination }}'
  ios13Test:
      runs-on: macos-latest
      strategy:
@@ -42,7 +42,7 @@ jobs:
         cd Example
         pod install --repo-update
      - name: Run Unit and UI Tests
-       run: /usr/bin/xcodebuild test -workspace "$XC_WORKSPACE" -scheme "$XC_SCHEME" -destination ${{ matrix.destination }}
+       run: /usr/bin/xcodebuild test -workspace "$XC_WORKSPACE" -scheme "$XC_SCHEME" -destination '${{ matrix.destination }}'
  ios14Test:
      runs-on: macos-latest
      strategy:
@@ -61,4 +61,4 @@ jobs:
         cd Example
         pod install --repo-update
      - name: Run Unit and UI Tests
-       run: /usr/bin/xcodebuild test -workspace "$XC_WORKSPACE" -scheme "$XC_SCHEME" -destination ${{ matrix.destination }}
+       run: /usr/bin/xcodebuild test -workspace "$XC_WORKSPACE" -scheme "$XC_SCHEME" -destination '${{ matrix.destination }}'
