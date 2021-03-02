@@ -1,0 +1,22 @@
+name: Unit Test
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: macos-latest
+    env:
+      XC_VERSION: ${{ '12.4' }}
+      XC_WORKSPACE: ${{ 'Example/MobilliumDateFormatter.xcworkspace' }}
+      XC_SCHEME: ${{ 'MobilliumDateFormatter-Example' }}
+    steps:
+    - name: Select latest Xcode
+      run: "sudo xcode-select -s /Applications/Xcode_$XC_VERSION.app"
+    - uses: actions/checkout@v2
+    - name: Run Unit and UI Tests
+      run: /usr/bin/xcodebuild test -workspace "$XC_WORKSPACE" -scheme "$XC_SCHEME" -destination 'platform=iOS Simulator,name=iPhone 11'
