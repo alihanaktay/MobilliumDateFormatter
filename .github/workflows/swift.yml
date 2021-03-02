@@ -9,7 +9,7 @@ jobs:
 
      runs-on: macos-latest
      env:
-       XC_VERSION: ${{ '12.4' }}
+       XC_VERSION: ${{ '11.4' }}
        XC_WORKSPACE: ${{ 'Example/MobilliumDateFormatter.xcworkspace' }}
        XC_SCHEME: ${{ 'MobilliumDateFormatter-Example' }}
      steps:
