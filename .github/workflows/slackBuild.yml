@@ -14,18 +14,28 @@ jobs:
        XC_WORKSPACE: ${{ 'Example/MobilliumDateFormatter.xcworkspace' }}
        XC_SCHEME: ${{ 'MobilliumDateFormatter-Example' }}
      steps:
-     - uses: actions/checkout@master
-     - name: Select latest Xcode
-       run: "sudo xcode-select -s /Applications/Xcode_$XC_VERSION.app"
-     - name: Install Dependencies
+     - name: TestVariables
        run: |
-        cd Example
-        pod install --repo-update
-     - name: Link to 13.7 Simulators
-       run: |
-         echo "Creating Runtimes folder if needed..."
-         sudo mkdir -p /Library/Developer/CoreSimulator/Profiles/Runtimes
-         echo "Creating symlink of the iOS 13.7 runtime..."
-         sudo ln -s /Applications/Xcode_11.7.app/Contents/Developer/Platforms/iPhoneOS.platform/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS.simruntime /Library/Developer/CoreSimulator/Profiles/Runtimes/iOS\ 13.7.simruntime
-     - name: Run Unit and UI Tests
-       run: /usr/bin/xcodebuild test -workspace "$XC_WORKSPACE" -scheme "$XC_SCHEME" -destination '${{ matrix.destination }}'
+        echo "event_type"
+        echo ${{ github.event.event_type }}
+        echo "workflow"
+        echo ${{ github.event.workflow }}
+        echo "branch"
+        echo ${{ github.event.branch }}
+        echo "version"
+        echo ${{ github.event.version }}
+     #- uses: actions/checkout@master
+     #- name: Select latest Xcode
+     #  run: "sudo xcode-select -s /Applications/Xcode_$XC_VERSION.app"
+     #- name: Install Dependencies
+     #  run: |
+     #   cd Example
+     #   pod install --repo-update
+     #- name: Link to 13.7 Simulators
+     #  run: |
+     #    echo "Creating Runtimes folder if needed..."
+     #    sudo mkdir -p /Library/Developer/CoreSimulator/Profiles/Runtimes
+     #    echo "Creating symlink of the iOS 13.7 runtime..."
+     #    sudo ln -s /Applications/Xcode_11.7.app/Contents/Developer/Platforms/iPhoneOS.platform/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS.simruntime /Library/Developer/CoreSimulator/Profiles/Runtimes/iOS\ 13.7.simruntime
+     #- name: Run Unit and UI Tests
+     #  run: /usr/bin/xcodebuild test -workspace "$XC_WORKSPACE" -scheme "$XC_SCHEME" -destination '${{ matrix.destination }}'
